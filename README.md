@@ -1,4 +1,4 @@
-# <img src="resources/logo.svg" width="35" alt="Algolia logo"> Algolia for Craft CMS
+# <img src="resources/icon.svg" width="35" alt="Algolia logo"> Algolia for Craft CMS
 
 Easily pull search results from Algolia into your Craft CMS website.
 
