@@ -1,0 +1,31 @@
+{#
+/**
+ * Algolia plugin for Craft CMS
+ *
+ * Algolia Settings.twig
+ *
+ * @author    TrendyMinds
+ * @copyright Copyright (c) 2018 TrendyMinds
+ * @link      https://trendyminds.com
+ * @package   Algolia
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+    label: 'Application ID',
+    instructions: 'Your Application ID found in the "API keys" section of your Algolia account',
+    id: 'applicationId',
+    name: 'applicationId',
+    value: settings['applicationId']})
+}}
+
+{{ forms.textField({
+    label: 'API Key',
+    instructions: 'Your Search-Only API key found in the "API keys" section of your Algolia account',
+    id: 'apiKey',
+    name: 'apiKey',
+    value: settings['apiKey']})
+}}

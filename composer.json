@@ -1,0 +1,15 @@
+{
+	"name": "trendyminds/algolia",
+	"description": "Interface with Algolia through Craft CMS",
+	"type": "craft-plugin",
+	"authors": [
+		{
+			"name": "TrendyMinds",
+			"homepage": "https://trendyminds.com"
+		}
+	],
+	"require": {
+		"composer/installers": "~1.0",
+		"algolia/algoliasearch-client-php": "^1.28"
+	}
+}
