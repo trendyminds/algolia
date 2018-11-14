@@ -57,11 +57,11 @@ In additional to Twig variables you can make a POST request to one of the follow
 **/actions/algolia/browse:**
 ```json
 {
-  index: "indexName"
-  query: "optional query",
-  attrs: {
-    distinct: true,
-    getRankingInfo: true
+  "index": "indexName",
+  "query": "optional query",
+  "attrs": {
+    "distinct": true,
+    "getRankingInfo": true
   }
 }
 ```
@@ -69,12 +69,12 @@ In additional to Twig variables you can make a POST request to one of the follow
 **/actions/algolia/search:**
 ```json
 {
-  index: "indexName"
-  query: "your query",
-  attrs: {
-    hitsPerPage: 5,
-    offset: 2,
-    page: 7
+  "index": "indexName",
+  "query": "your query",
+  "attrs": {
+    "hitsPerPage": 5,
+    "offset": 2,
+    "page": 7
   }
 }
 ```
