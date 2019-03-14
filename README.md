@@ -1,80 +1,43 @@
-# <img src="resources/icon.svg" width="35" alt="Algolia logo"> Algolia for Craft CMS
+# Algolia plugin for Craft CMS 3.x
 
-Easily pull search results from Algolia into your Craft CMS website.
+Easily pull search results from Algolia into your Craft CMS website
+
+![Screenshot](resources/img/plugin-logo.png)
+
+## Requirements
+
+This plugin requires Craft CMS 3.0.0-beta.23 or later.
 
 ## Installation
 
-To install Algolia, follow these steps:
+To install the plugin, follow these instructions.
 
-1. Download & unzip the file and place the `algolia` directory into your `craft/plugins` directory
-2. Install plugin in the Craft Control Panel under Settings > Plugins
-3. The plugin folder should be named `algolia` for Craft to see it. GitHub recently started appending `-master` (the branch name) to the name of the folder for zip file downloads.
-4. Enter your Application ID and API Key into the Settings area to connect to your Algolia account
+1. Open your terminal and go to your Craft project:
 
-Algolia works on Craft 2.4.x and Craft 2.5.x.
+        cd /path/to/project
 
-## Usage
+2. Then tell Composer to load the plugin:
 
-You can access your Algolia data within your templates using Twig variables or controller endpoints (as a simple REST API):
+        composer require trendyminds/algolia
 
-### Using Twig
-```twig
-{#
- # Browse an entire index
- #}
+3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Algolia.
 
-{% set optionalBrowseAttrs = {
-    distinct: true,
-    getRankingInfo: true
-  }
-%}
-{% for record in craft.algolia.browse("indexName", "optional query", optionalBrowseAttrs) %}
+## Algolia Overview
 
-{% endfor %}
+-Insert text here-
 
+## Configuring Algolia
 
+-Insert text here-
 
-{#
- # Search within an index
- #}
+## Using Algolia
 
-{% set optionalSearchAttrs = {
-    hitsPerPage: 5,
-    offset: 2,
-    page: 7
-  }
-%}
-{% for search in craft.algolia.search("indexName", "your query", optionalSearchAttrs) %}
-  {% for hit in search.hits %}
+-Insert text here-
 
-  {% endfor %}
-{% endfor %}
-```
+## Algolia Roadmap
 
-### Using REST API controllers
-In additional to Twig variables you can make a POST request to one of the following controller endpoints. The same index, query and optional attributes are available when you make your POST request.
+Some things to do, and ideas for potential features:
 
-**/actions/algolia/browse:**
-```json
-{
-  "index": "indexName",
-  "query": "optional query",
-  "attrs": {
-    "distinct": true,
-    "getRankingInfo": true
-  }
-}
-```
+* Release it
 
-**/actions/algolia/search:**
-```json
-{
-  "index": "indexName",
-  "query": "your query",
-  "attrs": {
-    "hitsPerPage": 5,
-    "offset": 2,
-    "page": 7
-  }
-}
-```
+Brought to you by [TrendyMinds](https://trendyminds.com)
