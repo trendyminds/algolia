@@ -14,6 +14,7 @@ use trendyminds\algolia\Algolia;
 
 use Craft;
 use craft\web\Controller;
+use craft\helpers\Json;
 
 /**
  * @author    TrendyMinds
@@ -43,11 +44,11 @@ class DefaultController extends Controller
     {
         $this->requirePostRequest();
 
-        $index = Craft::$app->request->getBodyParam("index");
-        $query = Craft::$app->request->getBodyParam("query") ?? "";
-        $params = Craft::$app->request->getBodyParam("params");
+        $postData = Json::decode(Craft::$app->getRequest()->getRawBody(), true);
 
-        $searchParameters = isset($params) ? json_decode($params, TRUE) : [];
+        $index = $postData["index"];
+        $query = $postData["query"] ?? "";
+        $searchParameters = $postData["params"] ?? [];
 
         $data = Algolia::$plugin->algoliaService->search($index, $query, $searchParameters);
 
@@ -61,11 +62,9 @@ class DefaultController extends Controller
     {
         $this->requirePostRequest();
 
-        $q = Craft::$app->request->getBodyParam("queries");
+        $postData = Json::decode(Craft::$app->getRequest()->getRawBody(), true);
 
-        $queries = isset($q) ? json_decode($q, TRUE) : [];
-
-        $data = Algolia::$plugin->algoliaService->multipleQueries($queries);
+        $data = Algolia::$plugin->algoliaService->multipleQueries($postData['queries']);
 
         return $this->asJson($data);
     }
@@ -77,11 +76,11 @@ class DefaultController extends Controller
     {
         $this->requirePostRequest();
 
-        $index = Craft::$app->request->getBodyParam("index");
-        $query = Craft::$app->request->getBodyParam("query") ?? "";
-        $params = Craft::$app->request->getBodyParam("params");
+        $postData = Json::decode(Craft::$app->getRequest()->getRawBody(), true);
 
-        $browseParameters = isset($params) ? json_decode($params, TRUE) : [];
+        $index = $postData["index"];
+        $query = $postData["query"] ?? "";
+        $browseParameters = $postData["params"] ?? [];
 
         $data = Algolia::$plugin->algoliaService->browse($index, $query, $browseParameters);
 

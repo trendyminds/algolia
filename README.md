@@ -73,55 +73,67 @@ Algolia for Craft CMS allows you to easily pull search results from Algolia into
 ## Using JSON REST API controllers
 In additional to Twig variables you can make a `POST` request to one of the following controller endpoints. The same index, query and optional attributes are available when you make your `POST` request.
 
-**NOTE**: The way you pass the example body params to your request depends greatly on the tool you are using to reach these endpoints. `axios`, `$.post` and other utilities will have slightly different ways to pass this data. **Don't forget to pass along your CSRF tokens to verify your request!**
+**NOTE**: The following examples use [Axios](#) for making API requests
 
-### Browse an index (`/actions/algolia/default/browse`)
+### Browse an index
 
 [Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in the `params` object.
 
-```json
-{
-  "index": "indexName",
-  "query": "optional query",
-  "params": {
-    "distinct": true,
-    "getRankingInfo": true
+```js
+axios.post("/actions/algolia/default/browse", {
+  index: "indexName",
+  query: "optional query",
+  params: {
+    distinct: true,
+    getRankingInfo: true
   }
-}
+}, {
+  headers: {
+    "X-CSRF-Token": YOUR_CRAFT_CSRF_TOKEN
+  }
+});
 ```
 
-### Search an index (`/actions/algolia/default/search`)
+### Search an index
 
 [Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in the `params` object.
 
-```json
-{
-  "index": "indexName",
-  "query": "your query",
-  "params": {
-    "hitsPerPage": 5,
-    "page": 7
+```js
+axios.post("/actions/algolia/default/search", {
+  index: "indexName",
+  query: "optional query",
+  params: {
+    hitsPerPage: 5,
+    page: 7
   }
-}
+}, {
+  headers: {
+    "X-CSRF-Token": YOUR_CRAFT_CSRF_TOKEN
+  }
+});
 ```
 
 ### Perform a multiple query search (`/actions/algolia/default/multiple-queries`)
 
 [Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in each `queries` object.
 
-```json
-{
- "queries": [
+```js
+axios.post("/actions/algolia/default/multiple-queries", {
+  queries: [
     {
-      "indexName": "indexName1",
-      "query": "optional query"
+      indexName: "indexName1",
+      query: "optional query"
     },
     {
-      "indexName": "indexName2",
-      "query": "optional query"
+      indexName: "indexName2",
+      query: "optional query"
     }
   ]
-}
+}, {
+  headers: {
+    "X-CSRF-Token": YOUR_CRAFT_CSRF_TOKEN
+  }
+});
 ```
 
 ## Requirements
