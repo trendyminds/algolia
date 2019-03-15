@@ -1,6 +1,10 @@
 # <img src="src/icon.svg" width="35" alt="Algolia logo"> Algolia
 
-Easily pull search results from Algolia into your Craft CMS templates or through REST API endpoints.
+<img src="resources/promo.png" alt="Query your Algolia data using Twig">
+
+## About
+
+Algolia for Craft CMS allows you to easily pull search results from Algolia into your Twig templates or through REST API endpoints.
 
 ## Template Usage
 
