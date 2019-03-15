@@ -1,15 +1,44 @@
 {
-	"name": "trendyminds/algolia",
-	"description": "Interface with Algolia through Craft CMS",
-	"type": "craft-plugin",
-	"authors": [
-		{
-			"name": "TrendyMinds",
-			"homepage": "https://trendyminds.com"
-		}
-	],
-	"require": {
-		"composer/installers": "~1.0",
-		"algolia/algoliasearch-client-php": "^1.28"
-	}
+    "name": "trendyminds/algolia",
+    "description": "Easily pull search results from Algolia into your Craft CMS website",
+    "type": "craft-plugin",
+    "version": "2.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "algolia"
+    ],
+    "support": {
+        "docs": "https://github.com/trendyminds/algolia/blob/master/README.md",
+        "issues": "https://github.com/trendyminds/algolia/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "TrendyMinds",
+            "homepage": "https://trendyminds.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1",
+        "algolia/algoliasearch-client-php": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+          "trendyminds\\algolia\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Algolia",
+        "handle": "algolia",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/trendyminds/algolia/master/CHANGELOG.md",
+        "components": {
+            "algoliaService": "trendyminds\\algolia\\services\\AlgoliaService"
+        },
+        "class": "trendyminds\\algolia\\Algolia"
+    }
 }

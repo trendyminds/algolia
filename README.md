@@ -1,80 +1,158 @@
-# <img src="resources/icon.svg" width="35" alt="Algolia logo"> Algolia for Craft CMS
+# <img src="src/icon.svg" width="35" alt="Algolia logo"> Algolia
 
-Easily pull search results from Algolia into your Craft CMS website.
+<img src="resources/promo-banner.png" alt="Query your Algolia data using Twig">
 
-## Installation
+## About
 
-To install Algolia, follow these steps:
+Algolia for Craft CMS allows you to easily pull search results from Algolia into your Twig templates or through REST API endpoints.
 
-1. Download & unzip the file and place the `algolia` directory into your `craft/plugins` directory
-2. Install plugin in the Craft Control Panel under Settings > Plugins
-3. The plugin folder should be named `algolia` for Craft to see it. GitHub recently started appending `-master` (the branch name) to the name of the folder for zip file downloads.
-4. Enter your Application ID and API Key into the Settings area to connect to your Algolia account
+## Template Usage
 
-Algolia works on Craft 2.4.x and Craft 2.5.x.
+### Browse an index
 
-## Usage
+[Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in the `params` object.
 
-You can access your Algolia data within your templates using Twig variables or controller endpoints (as a simple REST API):
-
-### Using Twig
 ```twig
-{#
- # Browse an entire index
- #}
-
-{% set optionalBrowseAttrs = {
-    distinct: true,
-    getRankingInfo: true
-  }
+{% for result in craft.algolia.browse({
+    index: "indexName",
+    query: "optional query",
+    params: {
+      distinct: true,
+      getRankingInfo: true
+    }
+  })
 %}
-{% for record in craft.algolia.browse("indexName", "optional query", optionalBrowseAttrs) %}
 
 {% endfor %}
+```
 
+### Search an index
 
+[Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in the `params` object.
 
-{#
- # Search within an index
- #}
-
-{% set optionalSearchAttrs = {
-    hitsPerPage: 5,
-    offset: 2,
-    page: 7
-  }
+```twig
+{% set search = craft.algolia.search({
+    index: "indexName",
+    query: "optional query",
+    params: {
+      hitsPerPage: 5,
+      page: 7
+    }
+  })
 %}
-{% for search in craft.algolia.search("indexName", "your query", optionalSearchAttrs) %}
-  {% for hit in search.hits %}
+
+{% for hit in search.hits %}
+
+{% endfor %}
+```
+
+### Perform a multiple query search
+
+[Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in each `queries` object.
+
+```twig
+{% set search = craft.algolia.multipleQueries([
+    {
+      indexName: "indexName1",
+      query: "optional query"
+    },
+    {
+      indexName: "indexName2",
+      query: "optional query"
+    }
+  ])
+%}
+
+{% for group in search.results %}
+  {% for hit in group.hits %}
 
   {% endfor %}
 {% endfor %}
 ```
 
-### Using REST API controllers
-In additional to Twig variables you can make a POST request to one of the following controller endpoints. The same index, query and optional attributes are available when you make your POST request.
+## Using JSON REST API controllers
+In additional to Twig variables you can make a `POST` request to one of the following controller endpoints. The same index, query and optional attributes are available when you make your `POST` request.
 
-**/actions/algolia/browse:**
-```json
-{
-  "index": "indexName",
-  "query": "optional query",
-  "attrs": {
-    "distinct": true,
-    "getRankingInfo": true
+**NOTE**: The following examples use [Axios](#) for making API requests
+
+### Browse an index
+
+[Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in the `params` object.
+
+```js
+axios.post("/actions/algolia/default/browse", {
+  index: "indexName",
+  query: "optional query",
+  params: {
+    distinct: true,
+    getRankingInfo: true
   }
-}
+}, {
+  headers: {
+    "X-CSRF-Token": YOUR_CRAFT_CSRF_TOKEN
+  }
+});
 ```
 
-**/actions/algolia/search:**
-```json
-{
-  "index": "indexName",
-  "query": "your query",
-  "attrs": {
-    "hitsPerPage": 5,
-    "offset": 2,
-    "page": 7
+### Search an index
+
+[Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in the `params` object.
+
+```js
+axios.post("/actions/algolia/default/search", {
+  index: "indexName",
+  query: "optional query",
+  params: {
+    hitsPerPage: 5,
+    page: 7
   }
-}
+}, {
+  headers: {
+    "X-CSRF-Token": YOUR_CRAFT_CSRF_TOKEN
+  }
+});
 ```
+
+### Perform a multiple query search
+
+[Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in each `queries` object.
+
+```js
+axios.post("/actions/algolia/default/multiple-queries", {
+  queries: [
+    {
+      indexName: "indexName1",
+      query: "optional query"
+    },
+    {
+      indexName: "indexName2",
+      query: "optional query"
+    }
+  ]
+}, {
+  headers: {
+    "X-CSRF-Token": YOUR_CRAFT_CSRF_TOKEN
+  }
+});
+```
+
+## Requirements
+
+This plugin requires Craft CMS 3.0.0-beta.23 or later.
+
+## Installation
+
+To install the plugin, follow these instructions.
+
+1. Open your terminal and go to your Craft project:
+
+        cd /path/to/project
+
+2. Then tell Composer to load the plugin:
+
+        composer require trendyminds/algolia
+
+3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Algolia.
+
+## Attribution
+This plugin is powered by the [Algolia PHP API client](https://www.algolia.com/doc/api-client/getting-started/install/php/). The client and icon/logo belong to Algolia.
