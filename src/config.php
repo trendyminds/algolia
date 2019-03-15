@@ -23,8 +23,6 @@
  */
 
 return [
-
-    // This controls blah blah blah
-    "someAttribute" => true,
-
+    "applicationId" => "",
+    "apiKey" => "",
 ];

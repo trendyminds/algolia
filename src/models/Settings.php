@@ -28,7 +28,8 @@ class Settings extends Model
     /**
      * @var string
      */
-    public $someAttribute = 'Some Default';
+    public $applicationId = '';
+    public $apiKey = '';
 
     // Public Methods
     // =========================================================================
@@ -39,8 +40,11 @@ class Settings extends Model
     public function rules()
     {
         return [
-            ['someAttribute', 'string'],
-            ['someAttribute', 'default', 'value' => 'Some Default'],
+            ['applicationId', 'string'],
+            ['applicationId', 'default', 'value' => ''],
+
+            ['apiKey', 'string'],
+            ['apiKey', 'default', 'value' => ''],
         ];
     }
 }

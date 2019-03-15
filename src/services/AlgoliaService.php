@@ -11,6 +11,7 @@
 namespace trendyminds\algolia\services;
 
 use trendyminds\algolia\Algolia;
+use Algolia\AlgoliaSearch\SearchClient;
 
 use Craft;
 use craft\base\Component;
@@ -22,19 +23,68 @@ use craft\base\Component;
  */
 class AlgoliaService extends Component
 {
+    private $client;
+
     // Public Methods
     // =========================================================================
-
-    /*
-     * @return mixed
-     */
-    public function exampleService()
+    function __construct()
     {
-        $result = 'something';
-        // Check our Plugin's settings for `someAttribute`
-        if (Algolia::$plugin->getSettings()->someAttribute) {
-        }
+        $applicationId = Craft::parseEnv(Algolia::$plugin->getSettings()->applicationId);
+        $apiKey = Craft::parseEnv(Algolia::$plugin->getSettings()->apiKey);
 
-        return $result;
+        $this->client = SearchClient::create($applicationId, $apiKey);
+    }
+
+    /**
+     * Browse an index
+     *
+     * @param string $index
+     * @param mixed $query
+     * @param array $browseParameters
+     * @return void
+     */
+    public function browse(string $index, $query = "", array $browseParameters = [])
+    {
+        $index = $this->client->initIndex($index);
+
+        $requestOptions = [
+            "query" => $query
+        ];
+
+        $requestOptions = array_merge($requestOptions, $browseParameters);
+
+        $res = $index->browseObjects($requestOptions);
+
+        return $res;
+    }
+
+    /**
+     * Search within an index
+     *
+     * @param string $index
+     * @param mixed $query
+     * @param array $searchParameters
+     * @return void
+     */
+    public function search(string $index, $query = "", array $searchParameters = [])
+    {
+        $index = $this->client->initIndex($index);
+
+        $res = $index->search($query, $searchParameters);
+
+        return [$res];
+    }
+
+    /**
+     * Perform a multiple query search
+     *
+     * @param array $queries
+     * @return void
+     */
+    public function multipleQueries(array $queries = [])
+    {
+        $res = $this->client->multipleQueries($queries);
+
+        return [$res];
     }
 }

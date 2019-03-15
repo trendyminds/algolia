@@ -28,12 +28,18 @@ class AlgoliaVariable
      * @param null $optional
      * @return string
      */
-    public function exampleVariable($optional = null)
+    public function browse(string $index, $query = "", $browseParameters = [])
     {
-        $result = "And away we go to the Twig template...";
-        if ($optional) {
-            $result = "I'm feeling optional today...";
-        }
-        return $result;
+        return Algolia::$plugin->algoliaService->browse($index, $query, $browseParameters);
+    }
+
+    public function search(string $index, $query = "", $searchParameters = [])
+    {
+        return Algolia::$plugin->algoliaService->search($index, $query, $searchParameters);
+    }
+
+    public function multipleQueries(array $queries = [])
+    {
+        return Algolia::$plugin->algoliaService->multipleQueries($queries);
     }
 }

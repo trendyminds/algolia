@@ -31,7 +31,7 @@ class DefaultController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['index', 'do-something'];
+    protected $allowAnonymous = ['search', 'browse', 'multiple-queries'];
 
     // Public Methods
     // =========================================================================
@@ -39,20 +39,52 @@ class DefaultController extends Controller
     /**
      * @return mixed
      */
-    public function actionIndex()
+    public function actionSearch()
     {
-        $result = 'Welcome to the DefaultController actionIndex() method';
+        $this->requirePostRequest();
 
-        return $result;
+        $index = Craft::$app->request->getBodyParam("index");
+        $query = Craft::$app->request->getBodyParam("query") ?? "";
+        $params = Craft::$app->request->getBodyParam("params");
+
+        $searchParameters = isset($params) ? json_decode($params, TRUE) : [];
+
+        $data = Algolia::$plugin->algoliaService->search($index, $query, $searchParameters);
+
+        return $this->asJson($data);
     }
 
     /**
      * @return mixed
      */
-    public function actionDoSomething()
+    public function actionMultipleQueries()
     {
-        $result = 'Welcome to the DefaultController actionDoSomething() method';
+        $this->requirePostRequest();
 
-        return $result;
+        $q = Craft::$app->request->getBodyParam("queries");
+
+        $queries = isset($q) ? json_decode($q, TRUE) : [];
+
+        $data = Algolia::$plugin->algoliaService->multipleQueries($queries);
+
+        return $this->asJson($data);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function actionBrowse()
+    {
+        $this->requirePostRequest();
+
+        $index = Craft::$app->request->getBodyParam("index");
+        $query = Craft::$app->request->getBodyParam("query") ?? "";
+        $params = Craft::$app->request->getBodyParam("params");
+
+        $browseParameters = isset($params) ? json_decode($params, TRUE) : [];
+
+        $data = Algolia::$plugin->algoliaService->browse($index, $query, $browseParameters);
+
+        return $this->asJson($data);
     }
 }
