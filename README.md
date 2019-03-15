@@ -1,6 +1,6 @@
 # <img src="src/icon.svg" width="35" alt="Algolia logo"> Algolia
 
-<img src="resources/promo.png" alt="Query your Algolia data using Twig">
+<img src="resources/promo-banner.png" alt="Query your Algolia data using Twig">
 
 ## About
 
