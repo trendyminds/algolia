@@ -28,13 +28,25 @@ class AlgoliaVariable
      * @param null $optional
      * @return string
      */
-    public function browse(string $index, $query = "", $browseParameters = [])
+    public function browse(array $options = [])
     {
+        $options = (object) $options;
+
+        $index = $options->index;
+        $query = $options->query ?? "";
+        $browseParameters = $options->params ?? [];
+
         return Algolia::$plugin->algoliaService->browse($index, $query, $browseParameters);
     }
 
-    public function search(string $index, $query = "", $searchParameters = [])
+    public function search(array $options = [])
     {
+        $options = (object) $options;
+
+        $index = $options->index;
+        $query = $options->query ?? "";
+        $searchParameters = $options->params ?? [];
+
         return Algolia::$plugin->algoliaService->search($index, $query, $searchParameters);
     }
 

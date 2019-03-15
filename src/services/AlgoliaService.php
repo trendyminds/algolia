@@ -72,7 +72,7 @@ class AlgoliaService extends Component
 
         $res = $index->search($query, $searchParameters);
 
-        return [$res];
+        return $res;
     }
 
     /**
@@ -85,6 +85,6 @@ class AlgoliaService extends Component
     {
         $res = $this->client->multipleQueries($queries);
 
-        return [$res];
+        return $res;
     }
 }
