@@ -1,8 +1,124 @@
-# Algolia plugin for Craft CMS 3.x
+# <img src="src/icon.svg" width="35" alt="Algolia logo"> Algolia
 
-Easily pull search results from Algolia into your Craft CMS website
+Easily pull search results from Algolia into your Craft CMS templates or through REST API endpoints.
 
-![Screenshot](resources/img/plugin-logo.png)
+## Template Usage
+
+### Browse an index
+
+[Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in the `params` object.
+
+```twig
+{% for result in craft.algolia.browse({
+    index: "indexName",
+    query: "optional query",
+    params: {
+      distinct: true,
+      getRankingInfo: true
+    }
+  })
+%}
+
+{% endfor %}
+```
+
+### Search an index
+
+[Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in the `params` object.
+
+```twig
+{% set search = craft.algolia.search({
+    index: "indexName",
+    query: "optional query",
+    params: {
+      hitsPerPage: 5,
+      offset: 2,
+      page: 7
+    }
+  })
+%}
+
+{% for hit in search.hits %}
+
+{% endfor %}
+```
+
+### Perform a multiple query search
+
+[Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in each `queries` object.
+
+```twig
+{% set search = craft.algolia.multipleQueries({
+    queries: [
+      {
+        indexName: "indexName1",
+        query: "optional query"
+      },
+      {
+        indexName: "indexName2",
+        query: "optional query"
+      }
+    ]
+  })
+%}
+
+{% for hit in search.hits %}
+
+{% endfor %}
+```
+
+## Using JSON REST API controllers
+In additional to Twig variables you can make a POST request to one of the following controller endpoints. The same index, query and optional attributes are available when you make your POST request.
+
+### Browse an index (`/actions/algolia/default/browse`)
+
+[Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in the `params` object.
+
+```json
+{
+  "index": "indexName",
+  "query": "optional query",
+  "params": {
+    "distinct": true,
+    "getRankingInfo": true
+  }
+}
+```
+
+### Search an index (`/actions/algolia/default/search`)
+
+[Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in the `params` object.
+
+```json
+{
+  "index": "indexName",
+  "query": "your query",
+  "params": {
+    "hitsPerPage": 5,
+    "offset": 2,
+    "page": 7
+  }
+}
+```
+
+### Perform a multiple query search (`/actions/algolia/default/multiple-queries`)
+
+[Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in each `queries` object.
+
+```json
+{
+ "queries": [
+    {
+      "indexName": "indexName1",
+      "query": "optional query"
+    },
+    {
+      "indexName": "indexName2",
+      "query": "optional query"
+    }
+  ]
+}
+```
 
 ## Requirements
 
@@ -21,23 +137,3 @@ To install the plugin, follow these instructions.
         composer require trendyminds/algolia
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Algolia.
-
-## Algolia Overview
-
--Insert text here-
-
-## Configuring Algolia
-
--Insert text here-
-
-## Using Algolia
-
--Insert text here-
-
-## Algolia Roadmap
-
-Some things to do, and ideas for potential features:
-
-* Release it
-
-Brought to you by [TrendyMinds](https://trendyminds.com)
