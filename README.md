@@ -142,17 +142,7 @@ This plugin requires Craft CMS 3.0.0-beta.23 or later.
 
 ## Installation
 
-To install the plugin, follow these instructions.
-
-1. Open your terminal and go to your Craft project:
-
-        cd /path/to/project
-
-2. Then tell Composer to load the plugin:
-
-        composer require trendyminds/algolia
-
-3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Algolia.
+[Install Algolia from the Craft CMS Plugin Store!](https://plugins.craftcms.com/algolia)
 
 ## Attribution
 This plugin is powered by the [Algolia PHP API client](https://www.algolia.com/doc/api-client/getting-started/install/php/). The client and icon/logo belong to Algolia.
