@@ -137,3 +137,6 @@ To install the plugin, follow these instructions.
         composer require trendyminds/algolia
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Algolia.
+
+## Attribution
+This plugin is powered by the [Algolia PHP API client](https://www.algolia.com/doc/api-client/getting-started/install/php/). The client and icon/logo belong to Algolia.
