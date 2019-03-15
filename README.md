@@ -32,7 +32,6 @@ Easily pull search results from Algolia into your Craft CMS templates or through
     query: "optional query",
     params: {
       hitsPerPage: 5,
-      offset: 2,
       page: 7
     }
   })
@@ -48,22 +47,22 @@ Easily pull search results from Algolia into your Craft CMS templates or through
 [Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in each `queries` object.
 
 ```twig
-{% set search = craft.algolia.multipleQueries({
-    queries: [
-      {
-        indexName: "indexName1",
-        query: "optional query"
-      },
-      {
-        indexName: "indexName2",
-        query: "optional query"
-      }
-    ]
-  })
+{% set search = craft.algolia.multipleQueries([
+    {
+      indexName: "indexName1",
+      query: "optional query"
+    },
+    {
+      indexName: "indexName2",
+      query: "optional query"
+    }
+  ])
 %}
 
-{% for hit in search.hits %}
+{% for group in search.results %}
+  {% for hit in group.hits %}
 
+  {% endfor %}
 {% endfor %}
 ```
 
@@ -97,7 +96,6 @@ In additional to Twig variables you can make a `POST` request to one of the foll
   "query": "your query",
   "params": {
     "hitsPerPage": 5,
-    "offset": 2,
     "page": 7
   }
 }
