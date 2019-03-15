@@ -113,7 +113,7 @@ axios.post("/actions/algolia/default/search", {
 });
 ```
 
-### Perform a multiple query search (`/actions/algolia/default/multiple-queries`)
+### Perform a multiple query search
 
 [Additional search parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) can be provided in each `queries` object.
 
