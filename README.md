@@ -68,7 +68,9 @@ Easily pull search results from Algolia into your Craft CMS templates or through
 ```
 
 ## Using JSON REST API controllers
-In additional to Twig variables you can make a POST request to one of the following controller endpoints. The same index, query and optional attributes are available when you make your POST request.
+In additional to Twig variables you can make a `POST` request to one of the following controller endpoints. The same index, query and optional attributes are available when you make your `POST` request.
+
+**NOTE**: The way you pass the example body params to your request depends greatly on the tool you are using to reach these endpoints. `axios`, `$.post` and other utilities will have slightly different ways to pass this data. **Don't forget to pass along your CSRF tokens to verify your request!**
 
 ### Browse an index (`/actions/algolia/default/browse`)
 
