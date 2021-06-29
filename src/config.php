@@ -23,6 +23,6 @@
  */
 
 return [
-    "applicationId" => "",
-    "apiKey" => "",
+	"applicationId" => "",
+	"apiKey" => "",
 ];

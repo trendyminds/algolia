@@ -22,29 +22,29 @@ use craft\base\Model;
  */
 class Settings extends Model
 {
-    // Public Properties
-    // =========================================================================
+	// Public Properties
+	// =========================================================================
 
-    /**
-     * @var string
-     */
-    public $applicationId = '';
-    public $apiKey = '';
+	/**
+	 * @var string
+	 */
+	public $applicationId = '';
+	public $apiKey = '';
 
-    // Public Methods
-    // =========================================================================
+	// Public Methods
+	// =========================================================================
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            ['applicationId', 'string'],
-            ['applicationId', 'default', 'value' => ''],
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
+	{
+		return [
+			['applicationId', 'string'],
+			['applicationId', 'default', 'value' => ''],
 
-            ['apiKey', 'string'],
-            ['apiKey', 'default', 'value' => ''],
-        ];
-    }
+			['apiKey', 'string'],
+			['apiKey', 'default', 'value' => ''],
+		];
+	}
 }

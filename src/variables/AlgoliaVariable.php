@@ -21,61 +21,61 @@ use Craft;
  */
 class AlgoliaVariable
 {
-    // Public Methods
-    // =========================================================================
-    public function browse(array $options = [])
-    {
-        $options = (object) $options;
+	// Public Methods
+	// =========================================================================
+	public function browse(array $options = [])
+	{
+		$options = (object) $options;
 
-        $index = $options->index;
-        $query = $options->query ?? "";
-        $browseParameters = $options->params ?? [];
+		$index = $options->index;
+		$query = $options->query ?? "";
+		$browseParameters = $options->params ?? [];
 
-        return Algolia::$plugin->algoliaService->browse($index, $query, $browseParameters);
-    }
+		return Algolia::$plugin->algoliaService->browse($index, $query, $browseParameters);
+	}
 
-    public function search(array $options = [])
-    {
-        $options = (object) $options;
+	public function search(array $options = [])
+	{
+		$options = (object) $options;
 
-        $index = $options->index;
-        $query = $options->query ?? "";
-        $searchParameters = $options->params ?? [];
+		$index = $options->index;
+		$query = $options->query ?? "";
+		$searchParameters = $options->params ?? [];
 
-        return Algolia::$plugin->algoliaService->search($index, $query, $searchParameters);
-    }
+		return Algolia::$plugin->algoliaService->search($index, $query, $searchParameters);
+	}
 
-    public function multipleQueries(array $queries = [])
-    {
-        return Algolia::$plugin->algoliaService->multipleQueries($queries);
-    }
+	public function multipleQueries(array $queries = [])
+	{
+		return Algolia::$plugin->algoliaService->multipleQueries($queries);
+	}
 
-    /**
-     * Parses an array of key/value filters into a string for the Algolia filtering engine
-     *
-     * @param array $filters A key/value pair of filters
-     *
-     * @return string A stringified version of your filters for Algolia to use in the search query
-     */
-    public function parseFilters(array $filters = []): string
-    {
-        return collect($filters)
-            ->filter(function ($item) {
-                // Remove filters that are either "null" or empty
-                return gettype($item) !== 'NULL' && $item !== '';
-            })->map(function ($items) {
+	/**
+	 * Parses an array of key/value filters into a string for the Algolia filtering engine
+	 *
+	 * @param array $filters A key/value pair of filters
+	 *
+	 * @return string A stringified version of your filters for Algolia to use in the search query
+	 */
+	public function parseFilters(array $filters = []): string
+	{
+		return collect($filters)
+			->filter(function ($item) {
+				// Remove filters that are either "null" or empty
+				return gettype($item) !== 'NULL' && $item !== '';
+			})->map(function ($items) {
 				// If we have a boolean value we need to coerce it to a string of 'true' or 'false'. Otherwise Algolia will not understand the syntax
-                return collect($items)->map(function ($item) {
+				return collect($items)->map(function ($item) {
 					if (gettype($item) === 'boolean') {
 						return $item === true ? 'true' : 'false';
 					}
 
 					return $item;
 				});
-            })->map(function ($item, $group) {
-                // Convert each group of results into string-based "OR" searches for Algolia's parsing engine
-                return "($group:\"" . collect($item)->join("\" OR $group:\"") . "\")";
-            })
-            ->join(" AND "); // Combine all terms together
-    }
+			})->map(function ($item, $group) {
+				// Convert each group of results into string-based "OR" searches for Algolia's parsing engine
+				return "($group:\"" . collect($item)->join("\" OR $group:\"") . "\")";
+			})
+			->join(" AND "); // Combine all terms together
+	}
 }

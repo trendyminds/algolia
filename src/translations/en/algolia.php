@@ -14,5 +14,5 @@
  * @since     2.0.0
  */
 return [
-    'Algolia plugin loaded' => 'Algolia plugin loaded',
+	'Algolia plugin loaded' => 'Algolia plugin loaded',
 ];

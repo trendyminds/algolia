@@ -24,66 +24,66 @@ use craft\helpers\Json;
 class DefaultController extends Controller
 {
 
-    // Protected Properties
-    // =========================================================================
+	// Protected Properties
+	// =========================================================================
 
-    /**
-     * @var    bool|array Allows anonymous access to this controller's actions.
-     *         The actions must be in 'kebab-case'
-     * @access protected
-     */
-    protected $allowAnonymous = ['search', 'browse', 'multiple-queries'];
+	/**
+	 * @var    bool|array Allows anonymous access to this controller's actions.
+	 *         The actions must be in 'kebab-case'
+	 * @access protected
+	 */
+	protected $allowAnonymous = ['search', 'browse', 'multiple-queries'];
 
-    // Public Methods
-    // =========================================================================
+	// Public Methods
+	// =========================================================================
 
-    /**
-     * @return mixed
-     */
-    public function actionSearch()
-    {
-        $this->requirePostRequest();
+	/**
+	 * @return mixed
+	 */
+	public function actionSearch()
+	{
+		$this->requirePostRequest();
 
-        $postData = Json::decode(Craft::$app->getRequest()->getRawBody(), true);
+		$postData = Json::decode(Craft::$app->getRequest()->getRawBody(), true);
 
-        $index = $postData["index"];
-        $query = $postData["query"] ?? "";
-        $searchParameters = $postData["params"] ?? [];
+		$index = $postData["index"];
+		$query = $postData["query"] ?? "";
+		$searchParameters = $postData["params"] ?? [];
 
-        $data = Algolia::$plugin->algoliaService->search($index, $query, $searchParameters);
+		$data = Algolia::$plugin->algoliaService->search($index, $query, $searchParameters);
 
-        return $this->asJson($data);
-    }
+		return $this->asJson($data);
+	}
 
-    /**
-     * @return mixed
-     */
-    public function actionMultipleQueries()
-    {
-        $this->requirePostRequest();
+	/**
+	 * @return mixed
+	 */
+	public function actionMultipleQueries()
+	{
+		$this->requirePostRequest();
 
-        $postData = Json::decode(Craft::$app->getRequest()->getRawBody(), true);
+		$postData = Json::decode(Craft::$app->getRequest()->getRawBody(), true);
 
-        $data = Algolia::$plugin->algoliaService->multipleQueries($postData['queries']);
+		$data = Algolia::$plugin->algoliaService->multipleQueries($postData['queries']);
 
-        return $this->asJson($data);
-    }
+		return $this->asJson($data);
+	}
 
-    /**
-     * @return mixed
-     */
-    public function actionBrowse()
-    {
-        $this->requirePostRequest();
+	/**
+	 * @return mixed
+	 */
+	public function actionBrowse()
+	{
+		$this->requirePostRequest();
 
-        $postData = Json::decode(Craft::$app->getRequest()->getRawBody(), true);
+		$postData = Json::decode(Craft::$app->getRequest()->getRawBody(), true);
 
-        $index = $postData["index"];
-        $query = $postData["query"] ?? "";
-        $browseParameters = $postData["params"] ?? [];
+		$index = $postData["index"];
+		$query = $postData["query"] ?? "";
+		$browseParameters = $postData["params"] ?? [];
 
-        $data = Algolia::$plugin->algoliaService->browse($index, $query, $browseParameters);
+		$data = Algolia::$plugin->algoliaService->browse($index, $query, $browseParameters);
 
-        return $this->asJson($data);
-    }
+		return $this->asJson($data);
+	}
 }
