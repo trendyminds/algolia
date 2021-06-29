@@ -63,6 +63,15 @@ class AlgoliaVariable
             ->filter(function ($item) {
                 // Remove filters that are either "null" or empty
                 return gettype($item) !== 'NULL' && $item !== '';
+            })->map(function ($items) {
+				// If we have a boolean value we need to coerce it to a string of 'true' or 'false'. Otherwise Algolia will not understand the syntax
+                return collect($items)->map(function ($item) {
+					if (gettype($item) === 'boolean') {
+						return $item === true ? 'true' : 'false';
+					}
+
+					return $item;
+				});
             })->map(function ($item, $group) {
                 // Convert each group of results into string-based "OR" searches for Algolia's parsing engine
                 return "($group:\"" . collect($item)->join("\" OR $group:\"") . "\")";
