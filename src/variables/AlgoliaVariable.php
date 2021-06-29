@@ -23,11 +23,6 @@ class AlgoliaVariable
 {
     // Public Methods
     // =========================================================================
-
-    /**
-     * @param null $optional
-     * @return string
-     */
     public function browse(array $options = [])
     {
         $options = (object) $options;
@@ -53,5 +48,25 @@ class AlgoliaVariable
     public function multipleQueries(array $queries = [])
     {
         return Algolia::$plugin->algoliaService->multipleQueries($queries);
+    }
+
+    /**
+     * Parses an array of key/value filters into a string for the Algolia filtering engine
+     *
+     * @param array $filters A key/value pair of filters
+     *
+     * @return string A stringified version of your filters for Algolia to use in the search query
+     */
+    public function parseFilters(array $filters = []): string
+    {
+        return collect($filters)
+            ->filter(function ($item) {
+                // Remove filters that are either "null" or empty
+                return gettype($item) !== 'NULL' && $item !== '';
+            })->map(function ($item, $group) {
+                // Convert each group of results into string-based "OR" searches for Algolia's parsing engine
+                return "($group:\"" . collect($item)->join("\" OR $group:\"") . "\")";
+            })
+            ->join(" AND "); // Combine all terms together
     }
 }

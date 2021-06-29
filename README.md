@@ -70,6 +70,32 @@ Algolia for Craft CMS allows you to easily pull search results from Algolia into
 {% endfor %}
 ```
 
+### Parsing filters
+
+When using filters in an Algolia search the engine requires [a particular syntax](https://www.algolia.com/doc/api-reference/api-parameters/filters/). Rather than stringifying your filters in Twig this plugin offers a way to convert an object like...
+
+```json
+{
+  food: ['fries', 'cake', 'pizza'],
+  colors: ['blue', 'green', 'red'],
+  featured: true
+}
+```
+to a valid Algolia filter string like...
+```
+'(food:"fries" OR food:"cake" OR food:"pizza") AND (colors:"blue" OR colors:"green" OR colors:"red") AND (featured:"1")'
+```
+
+```twig
+{% set filters = {
+  food: ['fries', 'cake', 'pizza'],
+  colors: ['blue', 'green', 'red'],
+  featured: true
+} %}
+
+{{ craft.algolia.parseFilters(filters) }}
+```
+
 ## Using JSON REST API controllers
 In additional to Twig variables you can make a `POST` request to one of the following controller endpoints. The same index, query and optional attributes are available when you make your `POST` request.
 
@@ -138,7 +164,7 @@ axios.post("/actions/algolia/default/multiple-queries", {
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0-beta.23 or later.
+This plugin requires Craft CMS 3.1.19+ and PHP 7.1+.
 
 ## Installation
 
