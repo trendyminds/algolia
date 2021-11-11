@@ -76,9 +76,9 @@ When using filters in an Algolia search the engine requires [a particular syntax
 
 ```json
 {
-  food: ['fries', 'cake', 'pizza'],
-  colors: ['blue', 'green', 'red'],
-  featured: true
+  "food": ["fries", "cake", "pizza"],
+  "colors": ["blue", "green", "red"],
+  "featured": true
 }
 ```
 to a valid Algolia filter string like...
