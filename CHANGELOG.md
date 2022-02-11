@@ -1,5 +1,13 @@
 # Release Notes for Algolia
 
+## 3.1.0 - 2022-02-11
+
+### Changed
+* Algolia PHP SDK updated to 3.2
+* PHP 7.3+ required
+* Craft 3.5+ required
+* Swapped tightenco/collect with illuminate/collections
+
 ## 3.0.1 - 2021-06-29
 
 ### Fixed

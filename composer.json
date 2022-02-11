@@ -2,7 +2,7 @@
     "name": "trendyminds/algolia",
     "description": "Easily pull search results from Algolia into your Craft CMS website",
     "type": "craft-plugin",
-    "version": "3.0.1",
+    "version": "3.1.0",
     "keywords": [
         "craft",
         "cms",
@@ -22,10 +22,10 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
-        "craftcms/cms": "^3.1.19",
-        "algolia/algoliasearch-client-php": "^3.0",
-        "tightenco/collect": "^5.8|^6.0|^7.0"
+        "php": ">=7.3",
+        "craftcms/cms": "^3.5.0",
+        "illuminate/collections": "^8.83",
+        "algolia/algoliasearch-client-php": "^3.2"
     },
     "autoload": {
         "psr-4": {
@@ -42,5 +42,11 @@
             "algoliaService": "trendyminds\\algolia\\services\\AlgoliaService"
         },
         "class": "trendyminds\\algolia\\Algolia"
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
     }
 }
