@@ -1,6 +1,6 @@
 <?php
 /**
- * Algolia plugin for Craft CMS 3.x
+ * Algolia plugin for Craft CMS 4.x
  *
  * Easily pull search results from Algolia into your Craft CMS website
  *
@@ -28,8 +28,8 @@ class Settings extends Model
 	/**
 	 * @var string
 	 */
-	public $applicationId = '';
-	public $apiKey = '';
+	public string $applicationId = '';
+	public string $apiKey = '';
 
 	// Public Methods
 	// =========================================================================
@@ -37,7 +37,7 @@ class Settings extends Model
 	/**
 	 * @inheritdoc
 	 */
-	public function rules()
+	public function rules(): array
 	{
 		return [
 			['applicationId', 'string'],

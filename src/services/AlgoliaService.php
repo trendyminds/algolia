@@ -1,6 +1,6 @@
 <?php
 /**
- * Algolia plugin for Craft CMS 3.x
+ * Algolia plugin for Craft CMS 4.x
  *
  * Easily pull search results from Algolia into your Craft CMS website
  *
@@ -15,6 +15,7 @@ use Algolia\AlgoliaSearch\SearchClient;
 
 use Craft;
 use craft\base\Component;
+use craft\helpers\App;
 
 /**
  * @author    TrendyMinds
@@ -29,8 +30,8 @@ class AlgoliaService extends Component
 	// =========================================================================
 	function __construct()
 	{
-		$applicationId = Craft::parseEnv(Algolia::$plugin->getSettings()->applicationId);
-		$apiKey = Craft::parseEnv(Algolia::$plugin->getSettings()->apiKey);
+		$applicationId = App::parseEnv(Algolia::$plugin->getSettings()->applicationId);
+		$apiKey = App::parseEnv(Algolia::$plugin->getSettings()->apiKey);
 
 		$this->client = SearchClient::create($applicationId, $apiKey);
 	}

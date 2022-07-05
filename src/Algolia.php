@@ -1,6 +1,6 @@
 <?php
 /**
- * Algolia plugin for Craft CMS 3.x
+ * Algolia plugin for Craft CMS 4.x
  *
  * Easily pull search results from Algolia into your Craft CMS website
  *
@@ -15,12 +15,9 @@ use trendyminds\algolia\variables\AlgoliaVariable;
 use trendyminds\algolia\models\Settings;
 
 use Craft;
+use craft\base\Model;
 use craft\base\Plugin;
-use craft\services\Plugins;
-use craft\events\PluginEvent;
-use craft\web\UrlManager;
 use craft\web\twig\variables\CraftVariable;
-use craft\events\RegisterUrlRulesEvent;
 
 use yii\base\Event;
 
@@ -49,7 +46,7 @@ class Algolia extends Plugin
 	/**
 	 * @var string
 	 */
-	public $schemaVersion = '2.0.0';
+	public string $schemaVersion = '2.0.0';
 
 	// Public Methods
 	// =========================================================================
@@ -63,22 +60,6 @@ class Algolia extends Plugin
 		self::$plugin = $this;
 
 		Event::on(
-			UrlManager::class,
-			UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-			function (RegisterUrlRulesEvent $event) {
-				$event->rules['siteActionTrigger1'] = 'algolia/default';
-			}
-		);
-
-		Event::on(
-			UrlManager::class,
-			UrlManager::EVENT_REGISTER_CP_URL_RULES,
-			function (RegisterUrlRulesEvent $event) {
-				$event->rules['cpActionTrigger1'] = 'algolia/default/do-something';
-			}
-		);
-
-		Event::on(
 			CraftVariable::class,
 			CraftVariable::EVENT_INIT,
 			function (Event $event) {
@@ -86,24 +67,6 @@ class Algolia extends Plugin
 				$variable = $event->sender;
 				$variable->set('algolia', AlgoliaVariable::class);
 			}
-		);
-
-		Event::on(
-			Plugins::class,
-			Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-			function (PluginEvent $event) {
-				if ($event->plugin === $this) {
-				}
-			}
-		);
-
-		Craft::info(
-			Craft::t(
-				'algolia',
-				'{name} plugin loaded',
-				['name' => $this->name]
-			),
-			__METHOD__
 		);
 	}
 
@@ -113,7 +76,7 @@ class Algolia extends Plugin
 	/**
 	 * @inheritdoc
 	 */
-	protected function createSettingsModel()
+	protected function createSettingsModel(): ?Model
 	{
 		return new Settings();
 	}

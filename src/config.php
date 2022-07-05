@@ -1,6 +1,6 @@
 <?php
 /**
- * Algolia plugin for Craft CMS 3.x
+ * Algolia plugin for Craft CMS 4.x
  *
  * Easily pull search results from Algolia into your Craft CMS website
  *

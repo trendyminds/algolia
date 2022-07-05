@@ -1,6 +1,6 @@
 <?php
 /**
- * Algolia plugin for Craft CMS 3.x
+ * Algolia plugin for Craft CMS 4.x
  *
  * Easily pull search results from Algolia into your Craft CMS website
  *
@@ -15,6 +15,7 @@ use trendyminds\algolia\Algolia;
 use Craft;
 use craft\web\Controller;
 use craft\helpers\Json;
+use craft\web\Response;
 
 /**
  * @author    TrendyMinds
@@ -32,7 +33,7 @@ class DefaultController extends Controller
 	 *         The actions must be in 'kebab-case'
 	 * @access protected
 	 */
-	protected $allowAnonymous = ['search', 'browse', 'multiple-queries'];
+	protected array|int|bool $allowAnonymous = ['search', 'browse', 'multiple-queries'];
 
 	// Public Methods
 	// =========================================================================
@@ -40,7 +41,7 @@ class DefaultController extends Controller
 	/**
 	 * @return mixed
 	 */
-	public function actionSearch()
+	public function actionSearch(): Response
 	{
 		$this->requirePostRequest();
 
@@ -58,7 +59,7 @@ class DefaultController extends Controller
 	/**
 	 * @return mixed
 	 */
-	public function actionMultipleQueries()
+	public function actionMultipleQueries(): Response
 	{
 		$this->requirePostRequest();
 
@@ -72,7 +73,7 @@ class DefaultController extends Controller
 	/**
 	 * @return mixed
 	 */
-	public function actionBrowse()
+	public function actionBrowse(): Response
 	{
 		$this->requirePostRequest();
 
