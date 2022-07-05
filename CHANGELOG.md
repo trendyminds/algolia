@@ -1,5 +1,10 @@
 # Release Notes for Algolia
 
+## 4.0.0 - 2022-07-05
+
+### Added
+* Support for Craft 4
+
 ## 3.1.0 - 2022-02-11
 
 ### Changed
