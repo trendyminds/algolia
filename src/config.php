@@ -5,6 +5,7 @@
  * Easily pull search results from Algolia into your Craft CMS website
  *
  * @link      https://trendyminds.com
+ *
  * @copyright Copyright (c) 2019 TrendyMinds
  */
 
@@ -23,6 +24,6 @@
  */
 
 return [
-	"applicationId" => "",
-	"apiKey" => "",
+    'applicationId' => '',
+    'apiKey' => '',
 ];

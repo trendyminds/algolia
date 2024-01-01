@@ -164,7 +164,7 @@ axios.post("/actions/algolia/default/multiple-queries", {
 
 ## Requirements
 
-This plugin requires Craft CMS 3.1.19+ and PHP 7.1+.
+This plugin requires Craft CMS 5+ and PHP 8.2+.
 
 ## Installation
 

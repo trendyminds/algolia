@@ -15,23 +15,21 @@
 
 {% import "_includes/forms" as forms %}
 
-{{forms.autosuggestField({
-				first: true,
-				instructions: 'Your Application ID found in the "API keys" section of your Algolia account',
-				label: 'Application ID',
-				id: 'applicationId',
-				name: 'applicationId',
-				value: settings['applicationId'],
-				suggestEnvVars: true
-		})
-}}
+{{ forms.autosuggestField({
+	first: true,
+	instructions: 'Your Application ID found in the "API keys" section of your Algolia account',
+	label: 'Application ID',
+	id: 'applicationId',
+	name: 'applicationId',
+	value: settings['applicationId'],
+	suggestEnvVars: true
+}) }}
 
-{{forms.autosuggestField({
-				instructions: 'Your Search-Only API key found in the "API keys" section of your Algolia account',
-				label: 'API Key',
-				id: 'apiKey',
-				name: 'apiKey',
-				value: settings['apiKey'],
-				suggestEnvVars: true
-		})
-}}
+{{ forms.autosuggestField({
+	instructions: 'Your Admin API key found in the "API keys" section of your Algolia account',
+	label: 'API Key',
+	id: 'apiKey',
+	name: 'apiKey',
+	value: settings['apiKey'],
+	suggestEnvVars: true
+}) }}
