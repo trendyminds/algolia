@@ -1,9 +1,9 @@
 # Release Notes for Algolia
 
-## 5.0.0 - 2022-01-01
+## 5.0.0 - 2024-04-05
 
 ### Added
-* Support for Craft 5 (alpha 3)
+* Support for Craft 5
 
 ## 4.0.0 - 2022-07-05
 
