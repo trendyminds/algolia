@@ -1,5 +1,10 @@
 # Release Notes for Algolia
 
+## 4.0.1 - 2025-05-12
+
+### Changed
+* Removed `composer.lock` from project
+
 ## 4.0.0 - 2022-07-05
 
 ### Added
