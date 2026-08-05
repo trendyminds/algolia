@@ -11,7 +11,7 @@
 
 namespace trendyminds\algolia\services;
 
-use Algolia\AlgoliaSearch\SearchClient;
+use Algolia\AlgoliaSearch\Api\SearchClient;
 use craft\base\Component;
 use craft\helpers\App;
 use trendyminds\algolia\Algolia;
@@ -43,15 +43,13 @@ class AlgoliaService extends Component
      */
     public function browse(string $index, $query = '', array $browseParameters = [])
     {
-        $index = $this->client->initIndex($index);
-
         $requestOptions = [
             'query' => $query,
         ];
 
         $requestOptions = array_merge($requestOptions, $browseParameters);
 
-        $res = $index->browseObjects($requestOptions);
+        $res = $this->client->browseObjects($index, $requestOptions);
 
         return $res;
     }
@@ -64,9 +62,9 @@ class AlgoliaService extends Component
      */
     public function search(string $index, $query = '', array $searchParameters = [])
     {
-        $index = $this->client->initIndex($index);
+        $searchParameters = array_merge(['query' => $query], $searchParameters);
 
-        $res = $index->search($query, $searchParameters);
+        $res = $this->client->searchSingleIndex($index, $searchParameters);
 
         return $res;
     }
@@ -78,7 +76,7 @@ class AlgoliaService extends Component
      */
     public function multipleQueries(array $queries = [])
     {
-        $res = $this->client->multipleQueries($queries);
+        $res = $this->client->search(['requests' => $queries]);
 
         return $res;
     }

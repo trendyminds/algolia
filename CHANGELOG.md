@@ -1,5 +1,10 @@
 # Release Notes for Algolia
 
+## 5.1.0 - 2026-08-05
+
+### Changed
+* Algolia PHP SDK updated to 4.x
+
 ## 5.0.1 - 2025-05-12
 
 ### Changed
