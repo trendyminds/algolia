@@ -24,7 +24,7 @@
     "require": {
         "php": "^8.2",
         "craftcms/cms": "^5.0.0",
-        "algolia/algoliasearch-client-php": "^3.4"
+        "algolia/algoliasearch-client-php": "^4.0"
     },
     "autoload": {
         "psr-4": {
