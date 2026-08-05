@@ -2,7 +2,7 @@
     "name": "trendyminds/algolia",
     "description": "Easily pull search results from Algolia into your Craft CMS website",
     "type": "craft-plugin",
-    "version": "5.0.1",
+    "version": "5.1.0",
     "keywords": [
         "craft",
         "cms",
